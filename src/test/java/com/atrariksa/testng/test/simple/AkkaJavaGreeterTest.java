@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 public class AkkaJavaGreeterTest {
 
     @Test()
-    public void testPlainJavaGreeter() {
+    public void testAkkaJavaGreeter() {
         try {
             ActorSystem actorSystem = ActorSystem.create("test");
             ActorRef dika = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), "dika");
