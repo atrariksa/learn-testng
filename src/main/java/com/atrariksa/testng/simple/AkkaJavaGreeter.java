@@ -26,7 +26,7 @@ public class AkkaJavaGreeter extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder().match(Greeting.class, greeting -> {
-            logger.info(greeting.getMessage());
+            logger.info(greeting.getMessage() + greeting.getName());
             getSender().tell(GREET + greeting.getName() + GREETING_RESPONSE + getSelf().path().name(), getSelf());
         }).build();
     }
