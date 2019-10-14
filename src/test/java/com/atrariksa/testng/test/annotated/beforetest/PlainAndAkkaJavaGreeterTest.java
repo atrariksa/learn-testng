@@ -39,20 +39,15 @@ public class PlainAndAkkaJavaGreeterTest {
     }
 
     @Test()
-    public void testAkkaJavaGreeter() {
-        try {
-            ActorSystem actorSystem = ActorSystem.create("test");
-            ActorRef dika = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), firstName);
-            ActorRef atrariksa = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), lastName);
-            CompletableFuture<Object> dikaResponse = ask(dika, greeting, Duration.ofMillis(1000)).toCompletableFuture();
-            CompletableFuture<Object> atrariksaResponse = ask(atrariksa, greeting, Duration.ofMillis(1000)).toCompletableFuture();
-            Assert.assertNotNull(dikaResponse.get());
-            Assert.assertEquals(dikaResponse.get(), "hi, actor tester, my name is " + firstName);
-            Assert.assertNotNull(atrariksaResponse.get());
-            Assert.assertEquals(atrariksaResponse.get(), "hi, actor tester, my name is " + lastName);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void testAkkaJavaGreeter() throws Exception {
+        ActorSystem actorSystem = ActorSystem.create("test");
+        ActorRef dika = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), firstName);
+        ActorRef atrariksa = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), lastName);
+        CompletableFuture<Object> dikaResponse = ask(dika, greeting, Duration.ofMillis(1000)).toCompletableFuture();
+        CompletableFuture<Object> atrariksaResponse = ask(atrariksa, greeting, Duration.ofMillis(1000)).toCompletableFuture();
+        Assert.assertNotNull(dikaResponse.get());
+        Assert.assertEquals(dikaResponse.get(), "hi, actor tester, my name is " + firstName);
+        Assert.assertNotNull(atrariksaResponse.get());
+        Assert.assertEquals(atrariksaResponse.get(), "hi, actor tester, my name is " + lastName);
     }
 }

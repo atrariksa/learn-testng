@@ -14,21 +14,16 @@ import java.util.concurrent.CompletableFuture;
 public class AkkaJavaGreeterTest {
 
     @Test()
-    public void testAkkaJavaGreeter() {
-        try {
-            ActorSystem actorSystem = ActorSystem.create("test");
-            ActorRef dika = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), "dika");
-            ActorRef atrariksa = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), "atrariksa");
-            AkkaJavaGreeter.Greeting greeting = new AkkaJavaGreeter.Greeting("hello, i am an ", "actor tester");
-            CompletableFuture<Object> dikaResponse = ask(dika, greeting, Duration.ofMillis(1000)).toCompletableFuture();
-            CompletableFuture<Object> atrariksaResponse = ask(atrariksa, greeting, Duration.ofMillis(1000)).toCompletableFuture();
-            Assert.assertNotNull(dikaResponse.get());
-            Assert.assertEquals(dikaResponse.get(), "hi, actor tester, my name is dika");
-            Assert.assertNotNull(atrariksaResponse.get());
-            Assert.assertEquals(atrariksaResponse.get(), "hi, actor tester, my name is atrariksa");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void testAkkaJavaGreeter() throws Exception {
+        ActorSystem actorSystem = ActorSystem.create("test");
+        ActorRef dika = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), "dika");
+        ActorRef atrariksa = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), "atrariksa");
+        AkkaJavaGreeter.Greeting greeting = new AkkaJavaGreeter.Greeting("hello, i am an ", "actor tester");
+        CompletableFuture<Object> dikaResponse = ask(dika, greeting, Duration.ofMillis(1000)).toCompletableFuture();
+        CompletableFuture<Object> atrariksaResponse = ask(atrariksa, greeting, Duration.ofMillis(1000)).toCompletableFuture();
+        Assert.assertNotNull(dikaResponse.get());
+        Assert.assertEquals(dikaResponse.get(), "hi, actor tester, my name is dika");
+        Assert.assertNotNull(atrariksaResponse.get());
+        Assert.assertEquals(atrariksaResponse.get(), "hi, actor tester, my name is atrariksa");
     }
 }
