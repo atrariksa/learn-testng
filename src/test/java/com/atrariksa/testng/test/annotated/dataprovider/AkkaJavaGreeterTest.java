@@ -22,7 +22,7 @@ public class AkkaJavaGreeterTest {
         firstName = "dika";
         lastName = "atrariksa";
         actorSystem = ActorSystem.create("test");
-        ActorRef actor = actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), firstName);
+        actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), firstName);
         actorSystem.actorOf(Props.create(AkkaJavaGreeter.class), lastName);
     }
 
